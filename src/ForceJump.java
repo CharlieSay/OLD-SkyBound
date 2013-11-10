@@ -1,6 +1,7 @@
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,7 @@ public class ForceJump implements Listener {
     public void onGroundHit(final PlayerMoveEvent e) {
         Player player = e.getPlayer();
         if (e.getFrom().getBlockY() > e.getTo().getBlockY()) {
+            player.playSound(player.getLocation(), Sound.CREEPER_HISS, 10, 0);
             if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() != (Material.AIR)) {
                 Vector v = player.getLocation().getDirection().multiply(-1).setY(1);
                 player.setVelocity(v);
