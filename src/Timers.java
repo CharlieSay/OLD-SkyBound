@@ -10,13 +10,15 @@ public class Timers extends JavaPlugin {
     public static int pregametimer = 30;
     public static int actualtimer = 300;
 
-    public void pregame() {
+    public static void pregame() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask((GravityXMain.instance), new Runnable() {
             @Override
             public void run() {                   
                 Player[] players = Bukkit.getServer().getOnlinePlayers();
                 pregametimer--;
-                boardmanager.seconds.setScore(pregametimer);
+                for (Player p1 : players){
+                    p1.setLevel(pregametimer);
+                }
                 if (pregametimer < 11) {
                     for (Player p : players) {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 0, 10);
@@ -26,8 +28,8 @@ public class Timers extends JavaPlugin {
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 0, 10);
                     }
                     Bukkit.broadcastMessage(GravityXMain.gamename + "Start hitting!");
-                }else{
-                    
+                }else if(pregametimer < 5){
+                    Bukkit.broadcastMessage(GravityXMain.gamename + pregametimer + " seconds left!");
                 }
             }
         }, 0, 20);
@@ -38,9 +40,6 @@ public class Timers extends JavaPlugin {
             public void run() {                   
                 Player[] players = Bukkit.getServer().getOnlinePlayers();
                 actualtimer--;
-                int seconds = actualtimer;
-                boardmanager.seconds.getScoreboard().resetScores(Bukkit.getOfflinePlayer(ChatColor.GREEN + "Lobby Timer:"));
-                boardmanager.gametimer = boardmanager.board.get
                 if (pregametimer < 11) {
                     for (Player p : players) {
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 0, 10);

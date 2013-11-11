@@ -16,7 +16,7 @@ public class ForceJump implements Listener {
         Player player = e.getPlayer();
         if (e.getFrom().getBlockY() > e.getTo().getBlockY()) {
             player.playSound(player.getLocation(), Sound.CREEPER_HISS, 10, 0);
-            if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() != (Material.AIR)) {
+            if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == (Material.EMERALD_BLOCK)) {
                 Vector v = player.getLocation().getDirection().multiply(-1).setY(1);
                 player.setVelocity(v);
             }else if(e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == (Material.REDSTONE_BLOCK)) {
@@ -31,7 +31,7 @@ public class ForceJump implements Listener {
                     }
                     
                 }, 150);
-            }else if(e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == (Material.EMERALD_BLOCK)){
+            }else if(e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() != (Material.AIR)){
                 Vector v = player.getLocation().getDirection().multiply(-1).setY(5);
                 player.setVelocity(v);                 
             }

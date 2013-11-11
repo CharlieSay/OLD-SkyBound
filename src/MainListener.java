@@ -24,12 +24,10 @@ public class MainListener implements Listener{
         PogoStick.ItemEquip(e.getPlayer());
         Playerlist.add(e.getPlayer().getName());
         e.setJoinMessage(GravityXMain.gamename + e.getPlayer().getName() + " has joined the game!");
-        boardmanager.maxplayers.setScore(Playerlist.size());
     }
     
     @EventHandler
     public void playerleave(PlayerQuitEvent e){
         Playerlist.remove(e.getPlayer().getName());
-        boardmanager.maxplayers.setScore(Playerlist.size());
     }
 }

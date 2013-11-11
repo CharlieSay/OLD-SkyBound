@@ -13,6 +13,7 @@ public class GravityXMain extends JavaPlugin{
             instance = this;
             Bukkit.getPluginManager().registerEvents(new ForceJump(), this);
             Bukkit.getPluginManager().registerEvents(new MainListener(), this);
+            Timers.pregame();
         }
     
 }
