@@ -2,3 +2,5 @@ name: GravityX
 main: GravityXMain
 version: 0.1
 commands:
+  start:
+  stopgame:

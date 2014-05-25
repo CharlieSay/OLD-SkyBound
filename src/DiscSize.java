@@ -8,11 +8,10 @@ import org.bukkit.entity.Entity;
 
 public class DiscSize {//TODO annotations
 
-    private static ArrayList<Block> sphere = new ArrayList<Block>();
     private static Location center;
     private static int radius;
 
-    public static void Sphere(Location center, int radius) {
+    public static void Sphere(Location center, int radius, Material blockid) {
         DiscSize.center = center;
         DiscSize.radius = radius;
         for (int X = -radius; X < radius; X++) {
@@ -20,12 +19,7 @@ public class DiscSize {//TODO annotations
                 for (int Z = -radius; Z < radius; Z++) {
                     if (Math.sqrt((X * X) + (Y * Y) + (Z * Z)) <= radius) {
                         Block block = center.getWorld().getBlockAt(X + center.getBlockX(), center.getBlockY(), Z + center.getBlockZ());
-                        block.setType(Material.REDSTONE_BLOCK);
-                        sphere.add(block);
-                        List<Entity> entList = block.getWorld().getEntities();
-                        for (Entity current : entList) {
-                            current.remove();
-                        }
+                        block.setType(blockid);
                     }
                 }
             }
@@ -40,21 +34,8 @@ public class DiscSize {//TODO annotations
         return radius;
     }
 
-    public ArrayList<Block> getBlocks() {
-        return sphere;
-    }
-
     private boolean isInside(int X, int Y, int Z) {
         return Math.sqrt((X * X) + (Y * Y) + (Z * Z)) <= radius;
-    }
-
-    public boolean overlaps(DiscSize other) {
-        for (Block block : other.getBlocks()) {
-            if (contains(block.getLocation())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public boolean contains(Location loc) {
