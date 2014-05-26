@@ -1,6 +1,5 @@
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,27 +17,31 @@ public class Timers extends JavaPlugin {
         PreGameTask = Bukkit.getScheduler().scheduleSyncRepeatingTask((GravityXMain.instance), new Runnable() {
             @Override
             public void run() {
-                Player[] players = Bukkit.getServer().getOnlinePlayers();
-                pregametimer--;
-                for (Player p1 : players) {
+                pregametimer--; 
+                for (Player p1 : Bukkit.getOnlinePlayers()) {
                     p1.setLevel(pregametimer);
-                }
-                if (pregametimer < 11) {
-                    for (Player p1 : players) {
+                    }
+                if (pregametimer < 11 && pregametimer > 0) {
+                    for (Player p1 : Bukkit.getOnlinePlayers()) {
                         p1.playSound(p1.getLocation(), Sound.ORB_PICKUP, 0, 10);
                     }
-                } else if (pregametimer < 5) {
-                    Bukkit.broadcastMessage(GravityXMain.gamename + pregametimer + " seconds left!");
+                    if (pregametimer < 6) {
+                        Bukkit.broadcastMessage(GravityXMain.gamename + pregametimer + " seconds left!");
+                    }               
+                   
                 } else if (pregametimer == 0) {
-                    for (Player p : players) {
-                        Vector v = p.getLocation().getDirection().multiply(-1).setX(0.1);
-                        p.playSound(p.getLocation(), Sound.LEVEL_UP, 0, 10);
+                    for (Player p : Bukkit.getOnlinePlayers()) {
+                        Vector v = p.getLocation().getDirection().multiply(-1).setY(7);
                         p.setVelocity(v);
-                        p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 1, Integer.MAX_VALUE));
+                        p.playSound(p.getLocation(), Sound.LEVEL_UP, 0, 10);
+                        p.setLevel(0);
+                        p.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 10, 100));
+                        PogoStick.ItemEquip(p);
                     }
+                    GravityXMain.gamestart = true;
+                    Bukkit.getScheduler().cancelTask(PreGameTask);
+                    Bukkit.broadcastMessage(GravityXMain.gamename + "Start hitting!");
                 }
-                Bukkit.getScheduler().cancelTask(PreGameTask);
-                Bukkit.broadcastMessage(GravityXMain.gamename + "Start hitting!");
             }
         }, 0, 20);
     }

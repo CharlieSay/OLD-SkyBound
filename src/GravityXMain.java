@@ -15,15 +15,14 @@ public class GravityXMain extends JavaPlugin {
     public static GravityXMain instance;
     public static String gamename = (ChatColor.RED + "[Gravity-X] " + ChatColor.WHITE);
     public static boolean gamestart;
-    public static List<String> FrozenPlayers = new ArrayList();
-
+    
     @Override
     public void onEnable() {
         gamestart = false;
         instance = this;
         Bukkit.getPluginManager().registerEvents(new ForceJump(), this);
-        Bukkit.getPluginManager().registerEvents(new MainListener(), this);
         Bukkit.getPluginManager().registerEvents(new DeathCheck(), this);
+        Bukkit.getPluginManager().registerEvents(new MainListener(),this);
         Timers.pregame();
         Bukkit.setDefaultGameMode(GameMode.ADVENTURE);
     }
