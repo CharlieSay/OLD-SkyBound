@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.List;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -42,7 +43,7 @@ public class MainListener implements Listener {
         if (e.getCause().equals(DamageCause.FALL)) {
             e.setCancelled(true);
         }else if (e.getCause().equals(DamageCause.ENTITY_ATTACK)){
-            e.setCancelled(true);
+            e.setCancelled(false);
         }
     }
 }
