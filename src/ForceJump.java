@@ -35,6 +35,7 @@ public class ForceJump implements Listener {
                 } else if (e.getTo().getBlock().getRelative(BlockFace.DOWN).getType() == (Material.ICE)) {
                     player.playSound(player.getLocation(), Sound.DIG_SNOW, 10, 0);
                     GravityXMain.FrozenPlayers.add(player.getName());
+                    player.sendMessage(GravityXMain.gamename + "You're now frozen.");
                     Bukkit.getScheduler().scheduleSyncDelayedTask((GravityXMain.instance), new Runnable() {
                         @Override
                         public void run() {
@@ -60,8 +61,7 @@ public class ForceJump implements Listener {
                     Vector v = player.getLocation().getDirection().multiply(-1).setY(3);
                     player.setVelocity(v);
                 }
-            }
-            if (FrozenPlayers.contains(e.getPlayer().getName())) {
+            } else if (FrozenPlayers.contains(e.getPlayer().getName())) {
                 e.setTo(e.getFrom());
             }
         } else {
