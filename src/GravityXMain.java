@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffect;
 public class GravityXMain extends JavaPlugin {
 
     public static GravityXMain instance;
-    public static String gamename = (ChatColor.RED + "[Gravity-X] " + ChatColor.WHITE);
+    public static String gamename = (ChatColor.RED + "[SkyBound] " + ChatColor.WHITE);
     public static boolean gamestart;
     
     @Override
